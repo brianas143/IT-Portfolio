@@ -1,0 +1,22 @@
+! Example switch ports: G0/1 uplink, F0/1 employee, F0/2 guest, F0/3 server
+configure terminal
+vlan 10
+ name EMPLOYEES
+vlan 20
+ name GUESTS
+vlan 30
+ name SERVERS
+interface GigabitEthernet0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+interface FastEthernet0/2
+ switchport mode access
+ switchport access vlan 20
+interface FastEthernet0/3
+ switchport mode access
+ switchport access vlan 30
+end
+write memory
