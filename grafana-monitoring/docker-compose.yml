@@ -1,0 +1,17 @@
+services:
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    ports: ["9090:9090"]
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  node-exporter:
+    image: prom/node-exporter:v1.8.2
+    ports: ["9100:9100"]
+  grafana:
+    image: grafana/grafana:11.3.0
+    ports: ["3000:3000"]
+    volumes:
+      - ./datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+      - grafana-data:/var/lib/grafana
+volumes:
+  grafana-data:
